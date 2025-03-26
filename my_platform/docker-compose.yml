@@ -41,8 +41,8 @@ services:
       - certbot-var:/var/lib/letsencrypt
       - ./certbot/www:/var/www/certbot
     entrypoint: >
-      sh -c "sleep 5 && certbot certonly --webroot -w /var/www/certbot 
-      --email your-email@example.com --agree-tos --no-eff-email 
+      sh -c "sleep 5 && certbot certonly --non-interactive --webroot -w /var/www/certbot 
+      --email amina@example.com --agree-tos --no-eff-email 
       -d platform.technowomen.kz"
 
   postgres_tech:
