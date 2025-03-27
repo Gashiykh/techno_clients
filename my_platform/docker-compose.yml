@@ -24,24 +24,10 @@ services:
     container_name: nginx
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - ./certbot/www:/var/www/certbot
     depends_on:
       - web
-
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    entrypoint: >
-      sh -c "sleep 5 && certbot certonly --non-interactive --webroot -w /var/www/certbot --email gashiykh@bk.ru --agree-tos --no-eff-email -d platform.technowomen.kz"
 
   postgres_tech:
     image: postgres:15
@@ -57,7 +43,5 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  certbot-etc:
-  certbot-var:
   postgres_data:
 
